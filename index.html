@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>映像テーマ</title>
+
+    <!-- noindex タグ -->
+    <meta name="robots" content="noindex, nofollow">
+
+    <style>
+        /* 基本設定 */
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #1D1D1D;
+            color: #FFFFFF;
+            font-size: 14pt;
+            font-family: sans-serif;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        /* パスワード入力画面 */
+        #lockScreen {
+            position: fixed;
+            inset: 0;
+            background-color: #1D1D1D;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        input {
+            background: none;
+            border: 1px solid #FFFFFF;
+            color: #FFFFFF;
+            font-size: 14pt;
+            padding: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 8px 20px;
+            font-size: 14pt;
+            background-color: #FD046C;
+            color: #FFFFFF;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* モザイク・隠す文字 */
+        .hide-word-wrapper {
+            position: relative;
+            display: inline-block;
+            font-size: 22pt;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .hide-word {
+            border-bottom: 3px solid #FFFFFF;
+            padding-bottom: 5px;
+            transition: color 1s ease;
+        }
+
+        .hide-word.color-change {
+            color: #FD046C;
+        }
+
+        .mosaic {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: #FD046C;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .mosaic.flash {
+            animation: flashAnim 0.15s ease;
+        }
+
+        .mosaic.hide {
+            opacity: 0;
+            transform: scale(1.2);
+        }
+
+        @keyframes flashAnim {
+            0% { background-color: #FD046C; }
+            50% { background-color: #FFFFFF; }
+            100% { background-color: #FD046C; }
+        }
+
+        /* 小文字用 */
+        .small {
+            font-size: 13pt;
+            margin: 5px 0;
+        }
+
+        /* 左揃え */
+        .left {
+            text-align: left;
+        }
+
+        /* 太字・中サイズ */
+        .bold {
+            font-weight: bold;
+        }
+        .medium {
+            font-size: 16pt;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 🔒 ロック画面 -->
+<div id="lockScreen">
+    <div>パスワードはQRコードの下</div>
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="unlock()">決定</button>
+</div>
+
+<!-- 🔓 本文 -->
+<div id="content" style="display:none;" onclick="reveal()">
+
+    <br><br><br><br>
+    <div>この映像のテーマは</div>
+
+    <!-- 文字の6行目を「「隠す」」に修正 -->
+    <div class="hide-word-wrapper" id="hideArea">
+        <div class="hide-word" id="hideText">「隠す」</div>
+        <div class="mosaic" id="mosaic"></div>
+    </div>
+
+    <br><br><br><br>
+
+    <div class="small">「隠す」と聞いてあなたは何を思い浮かべますか？</div>
+    <div class="small">見たくないものは隠す、見せたくないものは隠す。</div>
+    <div class="small">「隠す」というものは常に私達の身近にあります。</div>
+
+    <br>
+
+    <div class="small">自然の事象以外で連想される「隠す」には人間の意識・無意識どちらにも当てはめることが出来ます。</div>
+    <div class="small">つまりは隠すという行為が人間の心理を映すものである場合があるのです。</div>
+
+    <br>
+
+    <div class="small">この映像を見て、あなたは何を感じたでしょうか。</div>
+
+    <br>
+
+    <div class="small">この映像には様々な「隠す」に関する事象やモチーフを詰め込みました。</div>
+    <div class="small">それらを考察したり、感じたことを元に自分を振り返ってみてください。</div>
+
+    <br><br>
+
+    <hr style="border:1px dashed #FFFFFF;">
+
+    <br><br>
+
+    <div class="left">映像タイトルは「間」と書いて「あわい」と読む。</div>
+    <div class="left">間(あわい)は、向かい合うもののあいだや、二つのものの関係という意味を持つ。</div>
+    <div class="left">隠すというテーマは、自然×隠す、人間×隠すという二つのものの関係を持っている。</div>
+    <div class="left">そして映像内にはモザイクも使用しており、見えるものと見えないものの境界が表されている。</div>
+    <div class="left">映像テーマをタイトルで直接表現はしないが、意味を持った言葉にしたいという気持ちを組み込んだ。</div>
+
+    <br><br><br>
+
+    <div class="left bold medium">ストーリー展開</div>
+    <div class="left">この映像は俯瞰視点から自分の視点へと移り変わる冒頭</div>
+    <div class="left">「隠す」という事象の展開が起こる中盤</div>
+    <div class="left">これまでの事象が隠され、現実から目を逸らす終盤</div>
+    <div class="left">このように展開していく。始まりは目を開け、終わりは目を閉じる。</div>
+    <div class="left">ループするようになっており、時間が経てば忘れてしまう人間の意識を表している。</div>
+
+    <br><br><br>
+
+    <div class="left">映像内に度々登場する目のようなモチーフ。</div>
+    <div class="left">これは私達の生活は常に誰かの視線に晒されているということを表している。</div>
+
+    <br><br><br>
+
+    <div class="left">映像を見ている布の空間について。</div>
+    <div class="left">この空間は映像のテーマを元にしている。</div>
+    <div class="left">隔離された空間であること、布の間から映像を見ること、それにより没入感やテーマの考察に繋げる意味がある。</div>
+
+    <br>
+
+</div>
+
+<script>
+let revealed = false;
+
+function reveal() {
+    if (revealed) return;
+    revealed = true;
+
+    const mosaic = document.getElementById('mosaic');
+    const hideText = document.getElementById('hideText');
+
+    // モザイクフラッシュ
+    mosaic.classList.add('flash');
+
+    // 少ししてモザイク消去・ズーム
+    setTimeout(() => {
+        mosaic.classList.add('hide');
+    }, 150);
+
+    // 1秒後に文字色変更
+    setTimeout(() => {
+        hideText.classList.add('color-change');
+    }, 1000);
+}
+
+// パスワード解除
+const PASSWORD = "20254"; // 好きなパスワードに変更可
+function unlock() {
+    const input = document.getElementById("password").value;
+    if (input === PASSWORD) {
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("content").style.display = "block";
+    } else {
+        alert("パスワードが違います");
+    }
+}
+</script>
+
+</body>
+</html>
